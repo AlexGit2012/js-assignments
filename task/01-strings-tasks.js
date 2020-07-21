@@ -210,7 +210,20 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    let str = ""
+    for (let h=1;h<=height;h++) {
+        for (let w=1; w<=width; w++) {
+            ((h===1)&&(w===1)) && (str+="┌");
+            (((h===1)||(h===height)) && (w!==1 && w!==width) && (str+="─"));
+            ((h===1)&&(w===width)) && (str+="┐\n");
+            (w===1) && (h!==1 && h!==height) && (str+="│");
+            (w===width) && (h!==1 && h!==height) && (str+="│\n");
+            (h>1 && h<height)&&(w>1 && w<width) && (str+=" ");
+            (w===1) && (h===height) && (str+="└");
+            (w===width)&&(h===height) && (str+="┘\n")
+        }
+    }
+    return str
 }
 
 
@@ -230,7 +243,16 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    let alphabetLowerCase = "abcdefghijklmnopqrstuvwxyz";
+    let alphabetUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i=0; i<str.length; i++) {
+
+            str[i]=alphabetLowerCase[alphabetLowerCase.indexOf(str[i])+13]
+
+        // if (str[i] in alphabetUpperCase) {
+        //     str[i]=alphabetUpperCase[alphabetUpperCase.indexOf(str[i])+13]
+        // }
+    }
 }
 
 /**
