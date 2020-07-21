@@ -243,16 +243,18 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    let alphabetLowerCase = "abcdefghijklmnopqrstuvwxyz";
-    let alphabetUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let newStr = str.split("");
+    let alphabetLowerCase = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+    let alphabetUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (let i=0; i<str.length; i++) {
-
-            str[i]=alphabetLowerCase[alphabetLowerCase.indexOf(str[i])+13]
-
-        // if (str[i] in alphabetUpperCase) {
-        //     str[i]=alphabetUpperCase[alphabetUpperCase.indexOf(str[i])+13]
-        // }
+        if (alphabetUpperCase.includes(newStr[i])) {
+            newStr[i]=alphabetUpperCase[alphabetUpperCase.indexOf(str[i])+13]
+        }
+        if (alphabetLowerCase.includes(newStr[i])) {
+            newStr[i]=alphabetLowerCase[alphabetLowerCase.indexOf(str[i])+13]
+        }
     }
+    return newStr.toString().split(",").join("")
 }
 
 /**
@@ -269,7 +271,8 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    if (value instanceof String) return true
+    return (typeof(value)==="string")
 }
 
 
@@ -298,7 +301,9 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    let cardSuit = "♣♦♥♠";
+    let cardValue = "A234567891JQK";
+    return cardSuit.indexOf(value[value.length-1])*13+cardValue.indexOf(value[0]);
 }
 
 
