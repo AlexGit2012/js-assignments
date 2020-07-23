@@ -77,9 +77,12 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-    // let date = new Date(endDate.getTime()-startDate.getTime())
-    // return ""+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"."+date.getMilliseconds()
-    throw new Error('Not implemented');
+    let date = new Date(endDate.getTime() - startDate.getTime());
+    let days = endDate.getDay()- startDate.getDay();
+    return  ""+((date.getUTCHours()+24*days)<10 ? "0"+date.getUTCHours() : date.getUTCHours()+24*days)+":"
+            +(date.getUTCMinutes()<10 ? "0"+date.getUTCMinutes() : date.getUTCMinutes())+":"
+            +(date.getUTCSeconds()<10 ? "0"+date.getUTCSeconds() : date.getUTCSeconds())+"."
+            +(date.getUTCMilliseconds()<100 ? (date.getUTCMilliseconds()<10 ? "00"+date.getUTCMilliseconds() : "0"+date.getUTCMilliseconds()) :  date.getUTCMilliseconds())
 }
 
 
@@ -97,7 +100,11 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+    let hoursDegrees = (date.getUTCHours()>=12) ? date.getUTCHours()%12 : date.getUTCHours();
+    hoursDegrees = Math.abs(0.5*(60*hoursDegrees-11*date.getUTCMinutes()))
+    if (hoursDegrees>180) hoursDegrees=360-hoursDegrees
+    let degrees = hoursDegrees*(Math.PI/180)
+    return  degrees
 }
 
 
