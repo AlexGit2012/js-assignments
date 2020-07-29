@@ -568,12 +568,12 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-    let filteredArray = [...new Set(array.map(el=>keySelector(el)))].map(el=>[el,[]])
+    let filteredArray = [...new Set(array.map(el => keySelector(el)))].map(el => [el, []])
     let resultedArray = []
-    filteredArray.map((el,i)=>{
+    filteredArray.map((el, i) => {
         resultedArray.push([el[0], []])
-        array.map((elS,indexS)=>{
-            if (el[0]===keySelector(elS)) resultedArray[i][1].push(valueSelector(elS))
+        array.map((elS, indexS) => {
+            if (el[0] === keySelector(elS)) resultedArray[i][1].push(valueSelector(elS))
         })
     })
     return resultedArray
@@ -592,7 +592,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+    return arr.map(el => childrenSelector(el)).flat()
 }
 
 
@@ -609,7 +609,11 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+    let newArr = [...arr]
+    indexes.map(el => {
+        newArr = newArr[el]
+    })
+    return newArr
 }
 
 
@@ -632,7 +636,15 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    let headArr = arr.filter((el,i)=>{
+        if (i<Math.floor(arr.length/2)) return true
+    })
+    let tailArr = arr.filter((el,i)=>{
+        if (i>=Math.ceil(arr.length/2)) return true
+    })
+    let middle = arr.length%2===0 ? [] : [arr[Math.floor(arr.length/2)]]
+
+    return arr.length===2 ? [arr[1],arr[0]] : [tailArr.concat(middle.concat(headArr))].flat()
 }
 
 
