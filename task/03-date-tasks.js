@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   return Date.parse(value)
+    throw new Error('Not implemented');
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-    return Date.parse(value)
+    throw new Error('Not implemented');
 }
 
 
@@ -56,8 +56,7 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-    let year = new Date(date).getFullYear();
-    return (year%4===0)&&((year%100!==0)||(year%400===0))
+    throw new Error('Not implemented');
 }
 
 
@@ -77,19 +76,14 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-    let date = new Date(endDate.getTime() - startDate.getTime());
-    let days = endDate.getDay()- startDate.getDay();
-    return  ""+((date.getUTCHours()+24*days)<10 ? "0"+date.getUTCHours() : date.getUTCHours()+24*days)+":"
-            +(date.getUTCMinutes()<10 ? "0"+date.getUTCMinutes() : date.getUTCMinutes())+":"
-            +(date.getUTCSeconds()<10 ? "0"+date.getUTCSeconds() : date.getUTCSeconds())+"."
-            +(date.getUTCMilliseconds()<100 ? (date.getUTCMilliseconds()<10 ? "00"+date.getUTCMilliseconds() : "0"+date.getUTCMilliseconds()) :  date.getUTCMilliseconds())
+    throw new Error('Not implemented');
 }
 
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
- * 
+ *
  * @param {date} date
  * @return {number}
  *
@@ -100,11 +94,7 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    let hoursDegrees = (date.getUTCHours()>=12) ? date.getUTCHours()%12 : date.getUTCHours();
-    hoursDegrees = Math.abs(0.5*(60*hoursDegrees-11*date.getUTCMinutes()))
-    if (hoursDegrees>180) hoursDegrees=360-hoursDegrees
-    let degrees = hoursDegrees*(Math.PI/180)
-    return  degrees
+    throw new Error('Not implemented');
 }
 
 
